@@ -74,7 +74,7 @@ public class Agrigator {
         FileStatistic fileStatistic = null;
         if(list!= null && list.size()>0){
             boolean isFirst = true;
-            int countWords = 0;
+            int countWords       = 0;
             int middleCountWords = 0;
             fileStatistic = new FileStatistic();
             RowStatistic row = null;

@@ -13,15 +13,22 @@ import java.util.List;
  * Created by Sergey_PC on 22.02.2016.
  */
 public class RowStatisticDao extends DBHelper{
-    public void saveRowsStatistic(int extId, RowStatistic rowStatistic) {
+    public void saveRowStatistic(int extId, RowStatistic rowStatistic) {
         try (Connection conn = getConnection()) {
-            saveRowsStatistic(conn, extId, rowStatistic);
+            saveRowStatistic(conn, extId, rowStatistic);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void saveRowsStatistic(Connection conn, int extId, RowStatistic rowStatistic) throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+    public void saveRowsStatistic(Connection conn, int extId, List<RowStatistic> rowsStatistic) throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+        if(conn!= null && rowsStatistic != null)
+            for (int i=0; i<rowsStatistic.size(); i++){
+                saveRowStatistic(conn, extId, rowsStatistic.get(i));
+            }
+    }
+
+    public void saveRowStatistic(Connection conn, int extId, RowStatistic rowStatistic) throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
         if (rowStatistic != null) {
             int key = new CntDao().getCurrKey("ROW_STATISTIC");
             PreparedStatement ps = conn.prepareStatement(

@@ -1,39 +1,44 @@
 package com.lx.statistic.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * Created by Sergey_PC on 24.02.2016.
  */
 public class DBHelper {
-    private String uri = "jdbc:h2:~/test";
+    private String uri = "jdbc:h2:db";
     private String login = "sa";
     private String password = "";
 
-    protected Connection getConnection() throws ClassNotFoundException, SQLException {
+    public Connection getConnection() throws ClassNotFoundException, SQLException {
         Connection conn = null;
         Class.forName("org.h2.Driver");
         conn = DriverManager.getConnection(uri, login, password);
         return conn;
     }
 
-    private void initDataBase() throws SQLException, ClassNotFoundException {
+    public void initDataBase() throws SQLException, ClassNotFoundException {
+        PreparedStatement ps = null;
         if (!isCreatedTables())
             try (Connection conn = getConnection()) {
-                conn.prepareStatement(getScriptCreateTables());
+                ps = conn.prepareStatement(getScriptCreateTables());
+                ps.executeUpdate();
             }
     }
 
-    private boolean isCreatedTables() {
+    private boolean isCreatedTables() throws SQLException, ClassNotFoundException {
         boolean exists = true;
-        try (Connection conn = getConnection()) {
+        ResultSet rs = null;
+        Connection conn = getConnection();
+        try{
             PreparedStatement ps = conn.prepareStatement("select top 1 1 from CNT");
+            if((rs = ps.executeQuery())!= null){
+                while (rs.next()){
+                    exists = rs.getInt(1) > 0;
+                }
+            }
         } catch (Exception e) {
             exists = false;
-            e.printStackTrace();
         }
         return exists;
     }
