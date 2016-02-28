@@ -96,7 +96,7 @@ public class Agrigator {
                 }
             }
             fileStatistic.setAverageWordLenght(averageCountWords/list.size());
-            fileStatistic.setRowLenght(rowLenght/list.size());
+            fileStatistic.setRowLenght(list.size());
             fileStatistic.setCountWords(countWords);
             fileStatistic.setRows(list);
         }
