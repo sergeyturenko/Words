@@ -17,7 +17,7 @@ import java.util.*;
  * Created by Sergey_PC on 24.02.2016.
  */
 public class Main {
-    private int menu = 1;
+
     private Map<String, String> encodingMap;
 
     public Main() {
@@ -30,6 +30,7 @@ public class Main {
         String str = null;
         File file = null;
         String encoding = null;
+        int menu = 1;
         boolean isRecursingScanDirectorys = false;
         while (menu >= 1 && menu <= 4) {
             if (scanner != null) {
@@ -62,6 +63,7 @@ public class Main {
                         else menu += 2;
                         break;
                     case 3:
+                        String s = "y";
                         System.out.print("Scanning input files and directories? (y/n): ");
                         str = scanner.next();
                         if (isExitCommand(str)) {
@@ -71,17 +73,20 @@ public class Main {
                         if (!"y".equalsIgnoreCase(str) && !"n".equalsIgnoreCase(str)) {
                             System.out.println("Error input letter!");
                             break;
+                        } else {
+                            isRecursingScanDirectorys = s.equalsIgnoreCase(str);
                         }
-
                         menu++;
                         break;
                     case 4:
                         startProcess(file, encoding, isRecursingScanDirectorys);
+                        boolean isCorrectCommand = false;
                         System.out.print("Do you want continue? (y/n): ");
                         str = scanner.next();
-                        if (!"y".equalsIgnoreCase(str) && !"n".equalsIgnoreCase(str)) {
-                            System.out.println("Error input letter!");
-                            break;
+                        while (!isCorrectCommand) {
+                            if (!"y".equalsIgnoreCase(str) && !"n".equalsIgnoreCase(str)) {
+                                System.out.println("Error input letter!");
+                            } else isCorrectCommand = true;
                         }
                         if ("y".equalsIgnoreCase(str)) menu = 1;
                         else menu = 0;
@@ -91,7 +96,7 @@ public class Main {
         }
     }
 
-    public void saveStatistic(FileStatistic fileStatistic){
+    public void saveStatistic(FileStatistic fileStatistic) {
         try {
             new FileStatisticDao().saveFileAndRowStatistics(fileStatistic);
         } catch (Exception e) {
@@ -102,8 +107,8 @@ public class Main {
     public void startProcess(File file, String encoding, boolean isRecursing) {
         System.out.println("Process started...");
         List<File> list = null;
-        FileStatistic      fileStatistic    = null;
-        List<RowStatistic> rowStatistics    = null;
+        FileStatistic fileStatistic = null;
+        List<RowStatistic> rowStatistics = null;
         Agrigator agrigator = null;
         FileSystem fileSystem = new FileSystem();
         try {
@@ -116,9 +121,9 @@ public class Main {
             if (list != null && list.size() > 0) {
                 agrigator = new Agrigator();
                 for (File fx : list) {
-                    System.out.println("Calculate: "+fx);
+                    System.out.println("Calculate: " + fx);
                     rowStatistics = agrigator.getRowsStatisticsByFile(fx, encoding);
-                    fileStatistic  = agrigator.agregateFile(rowStatistics);
+                    fileStatistic = agrigator.agregateFile(rowStatistics);
                     fileStatistic.setFileName(fx.getName());
                     saveStatistic(fileStatistic);
                 }
