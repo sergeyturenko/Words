@@ -47,20 +47,21 @@ public class FileStatisticDao extends DBHelper {
     public void saveFileStatistic(Connection conn, FileStatistic fileStatistic) throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
         if (fileStatistic != null) {
             fileStatistic.setId(new CntDao().getCurrKey("FILE_STATISTIC"));
-            PreparedStatement ps = conn.prepareStatement(
+            try(PreparedStatement ps = conn.prepareStatement(
                     "insert into FILESTATISTIC (ID, FILENAME, LONGWORD, SHORTWORD, LONGWORDLENGHT, " +
                             " SHORTWORDLENGHT, ROWLENGHT, AVERAGEWORDLENGHT, COUNTWORDS)" +
-                            " values (?, ?, ?, ?, ?, ?, ?, ?, ?); ");
-            ps.setInt(1, fileStatistic.getId());
-            ps.setString(2, fileStatistic.getFileName());
-            ps.setString(3, fileStatistic.getLongWord());
-            ps.setString(4, fileStatistic.getShortWord());
-            ps.setInt(5, fileStatistic.getLongWordLenght());
-            ps.setInt(6, fileStatistic.getShortWordLenght());
-            ps.setInt(7, fileStatistic.getRowLenght());
-            ps.setInt(8, fileStatistic.getAverageWordLenght());
-            ps.setInt(9, fileStatistic.getCountWords());
-            ps.executeUpdate();
+                            " values (?, ?, ?, ?, ?, ?, ?, ?, ?); ")) {
+                ps.setInt(1, fileStatistic.getId());
+                ps.setString(2, fileStatistic.getFileName());
+                ps.setString(3, fileStatistic.getLongWord());
+                ps.setString(4, fileStatistic.getShortWord());
+                ps.setInt(5, fileStatistic.getLongWordLenght());
+                ps.setInt(6, fileStatistic.getShortWordLenght());
+                ps.setInt(7, fileStatistic.getRowLenght());
+                ps.setInt(8, fileStatistic.getAverageWordLenght());
+                ps.setInt(9, fileStatistic.getCountWords());
+                ps.executeUpdate();
+            }
         }
     }
 
