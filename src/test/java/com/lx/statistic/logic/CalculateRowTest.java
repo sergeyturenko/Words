@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Created by Sergey_PC on 28.02.2016.
+ * Created by Sergey_PC on 26.02.2016.
  */
 public class CalculateRowTest extends Assert {
     Agrigator agrigator = null;

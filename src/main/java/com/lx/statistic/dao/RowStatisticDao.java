@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Sergey_PC on 22.02.2016.
+ * Created by Sergey_PC on 23.02.2016.
  */
 public class RowStatisticDao extends DBHelper{
     public void saveRowStatistic(int extId, RowStatistic rowStatistic) {
@@ -52,9 +52,10 @@ public class RowStatisticDao extends DBHelper{
         RowStatistic statistic = null;
         ResultSet rs = null;
         try(Connection conn = getConnection()){
-            PreparedStatement ps = conn.prepareStatement("select ID, EXTID, LONGWORD, SHORTWORD, LONGWORDLENGHT, " +
-                    " SHORTWORDLENGHT, ROWLENGHT, AVERAGEWORDLENGHT, COUNTWORDS " +
-                    " from ROWSTATISTIC where EXTID = ?");
+            PreparedStatement ps = conn.prepareStatement(new StringBuilder()
+                    .append("select ID, EXTID, LONGWORD, SHORTWORD, LONGWORDLENGHT, ")
+                    .append(" SHORTWORDLENGHT, ROWLENGHT, AVERAGEWORDLENGHT, COUNTWORDS ")
+                    .append(" from ROWSTATISTIC where EXTID = ?").toString());
             ps.setInt(1, extId);
             if((rs = ps.executeQuery())!= null){
                 list = new ArrayList<>();

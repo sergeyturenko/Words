@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Sergey_PC on 28.02.2016.
+ * Created by Sergey_PC on 26.02.2016.
  */
 public class AgrigateFileTest extends Assert{
     Agrigator agrigator = null;

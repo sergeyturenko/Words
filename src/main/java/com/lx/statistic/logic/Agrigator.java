@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /**
- * Created by Sergey_PC on 20.02.2016.
+ * Created by Sergey_PC on 23.02.2016.
  */
 public class Agrigator {
 

@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Created by Sergey_PC on 24.02.2016.
+ * Created by Sergey_PC on 23.02.2016.
  */
 public class CntDao extends DBHelper{
     public int getCurrKey(String tableName) throws SQLException {

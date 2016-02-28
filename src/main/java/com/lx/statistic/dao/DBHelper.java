@@ -3,7 +3,7 @@ package com.lx.statistic.dao;
 import java.sql.*;
 
 /**
- * Created by Sergey_PC on 24.02.2016.
+ * Created by Sergey_PC on 23.02.2016.
  */
 public class DBHelper {
 //    private String uri = "jdbc:h2:db";
