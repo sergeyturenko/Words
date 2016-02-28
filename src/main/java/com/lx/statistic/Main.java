@@ -119,6 +119,7 @@ public class Main {
                     System.out.println("Calculate: "+fx);
                     rowStatistics = agrigator.getRowsStatisticsByFile(fx, encoding);
                     fileStatistic  = agrigator.agregateFile(rowStatistics);
+                    fileStatistic.setFileName(fx.getName());
                     saveStatistic(fileStatistic);
                 }
             }

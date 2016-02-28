@@ -9,12 +9,14 @@ import java.util.List;
 
 public class FileStatistic {
     private Integer id               ;
+    private String  fileName         ;
     private String  longWord         ;
     private String  shortWord        ;
     private int     longWordLenght   ;
     private int     shortWordLenght  ;
     private int     rowLenght        ;
     private int     averageWordLenght;
+    private int     countWords       ;
     private List<RowStatistic> rows = null;
 
     public Integer getId() {
@@ -23,6 +25,14 @@ public class FileStatistic {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public FileStatistic() {
@@ -79,6 +89,14 @@ public class FileStatistic {
 
     public void setAverageWordLenght(Integer averageWordLenght) {
         this.averageWordLenght = averageWordLenght;
+    }
+
+    public int getCountWords() {
+        return countWords;
+    }
+
+    public void setCountWords(int countWords) {
+        this.countWords = countWords;
     }
 
     public List<RowStatistic> getRows() {

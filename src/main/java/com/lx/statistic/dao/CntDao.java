@@ -17,7 +17,7 @@ public class CntDao extends DBHelper{
         try{
             conn = getConnection();
             conn.setAutoCommit(false);
-            ps = conn.prepareStatement("select CURR_KEY_NUM from CNT where ID = ?");
+            ps = conn.prepareStatement("select CURRKEYNUM from CNT where ID = ?");
             ps.setString(1, tableName);
             if((rs = ps.executeQuery())!= null){
                 while (rs.next()){
@@ -26,12 +26,12 @@ public class CntDao extends DBHelper{
             }
             if(key == 0){
                 ps.close();
-                ps = conn.prepareStatement("insert into CNT(ID, CURR_KEY_NUM) values (?, ?)");
+                ps = conn.prepareStatement("insert into CNT(ID, CURRKEYNUM) values (?, ?)");
                 ps.setString(1, tableName);
                 ps.setInt   (2, 1);
                 ps.executeUpdate();
             }
-            ps = conn.prepareStatement("update CNT set CURR_KEY_NUM = CURR_KEY_NUM + 1 where ID = ?");
+            ps = conn.prepareStatement("update CNT set CURRKEYNUM = CURRKEYNUM + 1 where ID = ?");
             ps.setString(1, tableName);
             ps.executeUpdate();
             conn.commit();

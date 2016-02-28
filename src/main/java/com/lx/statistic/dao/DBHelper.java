@@ -6,7 +6,8 @@ import java.sql.*;
  * Created by Sergey_PC on 24.02.2016.
  */
 public class DBHelper {
-    private String uri = "jdbc:h2:db";
+//    private String uri = "jdbc:h2:db";
+    private String uri = "jdbc:h2:file://d://DB//baseLab";
     private String login = "sa";
     private String password = "";
 
@@ -47,37 +48,39 @@ public class DBHelper {
         StringBuilder sb = new StringBuilder();
         sb.append("create table CNT ( ")
                 .append("ID                   varchar(25)          not null, ")
-                .append("CURR_KEY_NUM         integer              not null, ")
+                .append("CURRKEYNUM           integer              not null, ")
                 .append("constraint PK_CNT primary key (ID) ")
-                .append(");")
+                .append("); ")
 
-                .append("create table STATISTIC_FILE ( ")
-                .append("ID                   integer              not null, ")
-                .append("LONG_WORD            nvarchar(150)        null, ")
-                .append("SHORT_WORD           nvarchar(150)        null, ")
-                .append("LONG_WORD_LENGHT     integer              null, ")
-                .append("SHORT_WORD_LENGHT    integer              null, ")
-                .append("ROW_LENGHT           integer              null, ")
-                .append("AVERAGE_WORD_LENGHT  integer              null, ")
+                .append("create table FILESTATISTIC ( ")
+                .append("ID                  integer              not null, ")
+                .append("FILENAME            nvarchar(100)        null, ")
+                .append("LONGWORD            nvarchar(150)        null, ")
+                .append("SHORTWORD           nvarchar(150)        null, ")
+                .append("LONGWORDLENGHT      integer              null, ")
+                .append("SHORTWORDLENGHT     integer              null, ")
+                .append("ROWLENGHT           integer              null, ")
+                .append("AVERAGEWORDLENGHT   integer              null, ")
+                .append("COUNTWORDS          integer              null, ")
                 .append("constraint PK_STATISTIC_FILE primary key (ID)  ")
-                .append(");")
+                .append("); ")
 
-                .append("create table STATISTIC_ROW ( ")
-                .append("ID                   integer              not null, ")
-                .append("EXT_ID               integer              null, ")
-                .append("LONG_WORD            nvarchar(150)        null, ")
-                .append("SHORT_WORD           nvarchar(150)        null, ")
-                .append("LONG_WORD_LENGHT     integer              null, ")
-                .append("SHORT_WORD_LENGHT    integer              null, ")
-                .append("ROW_LENGHT           integer              null, ")
-                .append("AVERAGE_WORD_LENGHT  integer              null, ")
-                .append("COUNT_WORD           integer              null, ")
+                .append("create table ROWSTATISTIC ( ")
+                .append("ID                  integer              not null, ")
+                .append("EXTID               integer              null, ")
+                .append("LONGWORD            nvarchar(150)        null, ")
+                .append("SHORTWORD           nvarchar(150)        null, ")
+                .append("LONGWORDLENGHT      integer              null, ")
+                .append("SHORTWORDLENGHT     integer              null, ")
+                .append("ROWLENGHT           integer              null, ")
+                .append("AVERAGEWORDLENGHT   integer              null, ")
+                .append("COUNTWORDS          integer              null, ")
                 .append("constraint PK_STATISTIC_ROW primary key (ID) ")
                 .append("); ")
 
-                .append("alter table STATISTIC_ROW ")
-                .append("   add constraint FK_STATISTI_REFERENCE_STATISTI foreign key (EXT_ID) ")
-                .append("      references STATISTIC_FILE (ID) ")
+                .append("alter table ROWSTATISTIC ")
+                .append("   add constraint FK_STATISTI_REFERENCE_STATISTI foreign key (EXTID) ")
+                .append("      references FILESTATISTIC(ID) ")
                 .append("      on delete restrict on update restrict; ");
 
         return sb.toString();

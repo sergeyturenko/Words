@@ -6,6 +6,7 @@ package com.lx.statistic.data;
  */
 
 public class RowStatistic {
+
     private Integer id               ;
     private Integer extId            ;
     private String  longWord         ;
@@ -100,7 +101,6 @@ public class RowStatistic {
         this.countWords = countWords;
     }
 
-
     @Override
     public String toString() {
         return "RowStatistic{" +
@@ -113,6 +113,6 @@ public class RowStatistic {
                 ", rowLenght=" + rowLenght +
                 ", averageWordLenght=" + averageWordLenght +
                 ", countWords=" + countWords +
-                '}';
+                "}\n";
     }
 }

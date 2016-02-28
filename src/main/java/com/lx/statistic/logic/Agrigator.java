@@ -75,7 +75,8 @@ public class Agrigator {
         if(list!= null && list.size()>0){
             boolean isFirst = true;
             int countWords       = 0;
-            int middleCountWords = 0;
+            int rowLenght        = 0;
+            int averageCountWords = 0;
             fileStatistic = new FileStatistic();
             RowStatistic row = null;
             for(int i=0; i<list.size(); i++){
@@ -89,10 +90,14 @@ public class Agrigator {
                         fileStatistic.setShortWord(row.getShortWord());
                     }
                     isFirst = false;
-                    middleCountWords += row.getAverageWordLenght();
+                    averageCountWords += row.getAverageWordLenght();
+                    rowLenght+= row.getRowLenght();
                     countWords+=row.getCountWords();
                 }
             }
+            fileStatistic.setAverageWordLenght(averageCountWords/list.size());
+            fileStatistic.setRowLenght(rowLenght/list.size());
+            fileStatistic.setCountWords(countWords);
             fileStatistic.setRows(list);
         }
         return fileStatistic;

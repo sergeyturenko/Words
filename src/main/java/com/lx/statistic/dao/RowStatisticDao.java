@@ -32,8 +32,8 @@ public class RowStatisticDao extends DBHelper{
         if (rowStatistic != null) {
             int key = new CntDao().getCurrKey("ROW_STATISTIC");
             PreparedStatement ps = conn.prepareStatement(
-                    "insert into STATISTIC_ROW (ID, EXT_ID, LONG_WORD, SHORT_WORD, LONG_WORD_LENGHT, " +
-                            " SHORT_WORD_LENGHT, ROW_LENGHT, AVERAGE_WORD_LENGHT, COUNT_WORD)" +
+                    "insert into ROWSTATISTIC (ID, EXTID, LONGWORD, SHORTWORD, LONGWORDLENGHT, " +
+                            " SHORTWORDLENGHT, ROWLENGHT, AVERAGEWORDLENGHT, COUNTWORDS)" +
                             " values (?, ?, ?, ?, ?, ?, ?, ?, ?); ");
             ps.setInt   (1, key);
             ps.setInt   (2, extId                              );
@@ -52,9 +52,9 @@ public class RowStatisticDao extends DBHelper{
         RowStatistic statistic = null;
         ResultSet rs = null;
         try(Connection conn = getConnection()){
-            PreparedStatement ps = conn.prepareStatement("select ID, EXT_ID, LONG_WORD, SHORT_WORD, LONG_WORD_LENGHT, " +
-                    " SHORT_WORD_LENGHT, ROW_LENGHT, AVERAGE_WORD_LENGHT, COUNT_WORD " +
-                    " from STATISTIC_ROW where EXT_ID = ?");
+            PreparedStatement ps = conn.prepareStatement("select ID, EXTID, LONGWORD, SHORTWORD, LONGWORDLENGHT, " +
+                    " SHORTWORDLENGHT, ROWLENGHT, AVERAGEWORDLENGHT, COUNTWORDS " +
+                    " from ROWSTATISTIC where EXTID = ?");
             ps.setInt(1, extId);
             if((rs = ps.executeQuery())!= null){
                 list = new ArrayList<>();
